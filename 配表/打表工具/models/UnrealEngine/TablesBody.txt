@@ -1,0 +1,13 @@
+﻿// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "Tables{0}.h"
+#include "ThisGame/Framework/StaticFunctions.h"
+{1}
+
+TArray<UTableScheme*> UTables{0}::RegistTables()
+{
+	TArray<UTableScheme*> Tables;
+{2}
+	return Tables;
+}

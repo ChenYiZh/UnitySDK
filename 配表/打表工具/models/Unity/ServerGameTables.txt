@@ -1,0 +1,8 @@
+﻿using System.Collections.Generic;
+
+namespace GameServer
+{
+{{0}}
+
+{{1}}
+}

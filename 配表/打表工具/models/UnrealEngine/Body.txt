@@ -1,0 +1,60 @@
+﻿#include "Table{0}.h"
+#include "ThisGame/Framework/StaticFunctions.h"
+
+void UData{0}::Parse(TArray<FString> Line)
+{
+{2}
+}
+
+void UTable{0}::OnCreate_Implementation(UParameter* Param)
+{
+	TableName = L"{1}.txt";
+}
+
+void UTable{0}::Parse(TArray<TArray<FString>> FileLines)
+{
+	for (auto line : FileLines)
+	{
+		if (line.Num() == 0) { continue; }
+		int id = FCString::Atoi(*line[0]);
+		if (id < 0) { continue; }
+		UData{0}* item = New<UData{0}>(this);
+		item->Parse(line);
+		item->AddToRoot();
+		if (Table.Contains(id))
+		{
+			Table[id] = item;
+		}
+		else
+		{
+			Table.Add(id, item);
+		}
+	}
+}
+
+void UTable{0}::OnDestroy_Implementation()
+{
+	for (auto pair : Table)
+	{
+		pair.Value->RemoveFromRoot();
+	}
+	Table.Empty();
+}
+
+UData{0}* UTable{0}::Get(int Key)
+{
+	TMap<int, UData{0}*> table = Singleton<UTable{0}>()->Table;
+	if (table.Contains(Key))
+	{
+		return table[Key];
+	}
+	else
+	{
+		throw L"Table Data Error!";
+	}
+}
+
+TMap<int, UData{0}*> UTable{0}::Map()
+{
+	return Singleton<UTable{0}>()->Table;
+}
